@@ -21,7 +21,8 @@ def recommend(movie,num):
 
 def ratingBased(genres,lang,rating = 6,num = 10):
   mov = tv_series[(tv_series['vote_average'] > rating) & (tv_series['genres'].str.contains(pat = genres.lower())) & (tv_series['original_language'] == lang.lower())]
-  mov['poster_path'] = "https://image.tmdb.org/t/p/w500" + mov['poster_path']
+  mov.loc[:, 'poster_path'] = "https://image.tmdb.org/t/p/w500" + mov['poster_path']
+  #mov['poster_path'] = "https://image.tmdb.org/t/p/w500" + mov['poster_path']
   movie_list = mov['name'].head(num).tolist()
   mov_poster = mov['poster_path'].head(num).tolist()
   movie_overview = mov['overview'].head(num).tolist()
