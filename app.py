@@ -54,7 +54,7 @@ elif(recommended_type == category[1]):
     selected_genre = st.selectbox("Select your preferred genre",genres)
     selected_lang = st.selectbox("Select Language",lang)
     rating = st.slider("Select minimum rating",0,10,6)
-    num = st.slider("Select number of recommendations",0,50,5)
+    num = st.slider("Select number of recommendations",0,20,5)
 
     items_per_column = 3
     num_columns = num // items_per_column + (num % items_per_column > 0)
