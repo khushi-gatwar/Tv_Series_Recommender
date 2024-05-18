@@ -33,7 +33,12 @@ st.set_page_config(layout="wide")
 
 st.header('Tv-Series Recommender System')
 tv_series = pd.read_csv('tv_series.csv')
-similarity = pickle.load(open('similarity.pkl','rb'))
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfid = TfidfVectorizer(stop_words= 'english')
+from sklearn.metrics.pairwise import cosine_similarity
+tfid_matrix = tfid.fit_transform(tv_series['tags'])
+similarity = cosine_similarity(tfid_matrix, tfid_matrix)
+#similarity = pickle.load(open('similarity.pkl','rb'))
 
 category = ['--Select--','Rating & Categories: Metadata Based','Tv-Series: Content Based']
 recommended_type = st.selectbox("Select your Preferred recommendation type",options=category)
