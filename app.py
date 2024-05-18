@@ -22,7 +22,6 @@ def recommend(movie,num):
 def ratingBased(genres,lang,rating = 6,num = 10):
   mov = tv_series[(tv_series['vote_average'] > rating) & (tv_series['genres'].str.contains(pat = genres.lower())) & (tv_series['original_language'] == lang.lower())]
   mov.loc[:, 'poster_path'] = "https://image.tmdb.org/t/p/w500" + mov['poster_path']
-  #mov['poster_path'] = "https://image.tmdb.org/t/p/w500" + mov['poster_path']
   movie_list = mov['name'].head(num).tolist()
   mov_poster = mov['poster_path'].head(num).tolist()
   movie_overview = mov['overview'].head(num).tolist()
@@ -33,13 +32,15 @@ def ratingBased(genres,lang,rating = 6,num = 10):
 st.set_page_config(layout="wide")
 
 st.header('Tv-Series Recommender System')
+
+#model 
 tv_series = pd.read_csv('tv_series.csv')
 from sklearn.feature_extraction.text import TfidfVectorizer
 tfid = TfidfVectorizer(stop_words= 'english')
 from sklearn.metrics.pairwise import cosine_similarity
 tfid_matrix = tfid.fit_transform(tv_series['tags'])
 similarity = cosine_similarity(tfid_matrix, tfid_matrix)
-#similarity = pickle.load(open('similarity.pkl','rb'))
+
 
 category = ['--Select--','Rating & Categories: Metadata Based','Tv-Series: Content Based']
 recommended_type = st.selectbox("Select your Preferred recommendation type",options=category)
