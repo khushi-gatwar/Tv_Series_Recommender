@@ -87,7 +87,7 @@ elif recommended_type == category[2]:
         "Type or select a movie from the dropdown",
         movie_list
     )
-    nums = st.slider('Select number of recommendations',0,50,5)
+    nums = st.slider('Select number of recommendations',0,20,5)
 
     items_per_column = 3
     num_columns = nums // items_per_column + (nums % items_per_column > 0)
