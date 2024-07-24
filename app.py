@@ -35,6 +35,7 @@ st.header('Tv-Series Recommender System')
 
 #model 
 tv_series = pd.read_csv('tv_series.csv')
+tv_series = tv_series.head(5000)
 from sklearn.feature_extraction.text import TfidfVectorizer
 tfid = TfidfVectorizer(stop_words= 'english')
 from sklearn.metrics.pairwise import cosine_similarity
